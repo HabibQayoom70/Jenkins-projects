@@ -2,10 +2,7 @@
 
 set -e  # Stop on any error
 
-# Delete the script if it already exists
-if [ -f "update_env.sh" ]; then
-  rm -f update_env.sh
-fi
+
 
 echo "🔄 Setting up project..."
 
@@ -69,6 +66,7 @@ networks:
     driver: bridge
 EOF
 echo "✅ docker-compose.yml replaced."
+ls
 
 if [ -d "Wanderlust-Mega-Project/backend" ]; then
   cd Wanderlust-Mega-Project/backend
