@@ -5,7 +5,7 @@ set -e  # Stop on any error
 echo "🔄 Setting up project..."
 
 # 1. Replace docker-compose.yml
-cd Wanderlust-Mega-Project
+
 cat > docker-compose.yml <<EOF
 version: '3.9'
 
