@@ -1,7 +1,8 @@
 #!/bin/bash
 
 set -e  # Stop on any error
-
+ls
+pwd
 echo "🔄 Setting up project..."
 
 # 1. Replace docker-compose.yml
