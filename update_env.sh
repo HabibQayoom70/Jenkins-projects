@@ -66,7 +66,6 @@ networks:
     driver: bridge
 EOF
 echo "✅ docker-compose.yml replaced."
-ls
 
 if [ -d "Wanderlust-Mega-Project/backend" ]; then
   cd Wanderlust-Mega-Project/backend
@@ -81,7 +80,7 @@ if [ -d "Wanderlust-Mega-Project/backend" ]; then
   cd ..
 else
   echo "❌ backend  directory not found !"
-  dir
+  ls
   exit 1
 fi
 
