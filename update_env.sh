@@ -2,8 +2,6 @@
 
 set -e  # Stop on any error
 
-
-
 echo "🔄 Setting up project..."
 
 # 1. Replace docker-compose.yml
@@ -65,9 +63,11 @@ networks:
   app-network:
     driver: bridge
 EOF
+
 echo "✅ docker-compose.yml replaced."
-dir('Wanderlust-Mega-Project/backend')
-if [ -d "Wanderlust-Mega-Project/backend" ]; then
+
+# 2. Modify backend/.env.docker
+
   cd Wanderlust-Mega-Project/backend
   if [ -f ".env.docker" ]; then
     sed -i 's|MONGODB_URI=.*|MONGODB_URI=mongodb://mongo:27017/wanderlust|' .env.docker
@@ -77,16 +77,13 @@ if [ -d "Wanderlust-Mega-Project/backend" ]; then
   else
     echo "⚠️ backend/.env.docker not found."
   fi
-  cd ..
-else
-  echo "❌ backend  directory not found !"
-  ls
-  exit 1
-fi
+  cd ../..
+
 
 # 3. Replace frontend/Dockerfile
-dir('Wanderlust-Mega-Project/frontend')
-cat > Dockerfile <<EOF
+if [ -d "Wanderlust-Mega-Project/frontend" ]; then
+  cd Wanderlust-Mega-Project/frontend
+  cat > Dockerfile <<EOF
 # Stage 1
 FROM node:21 AS frontend-builder
 WORKDIR /app
@@ -103,16 +100,20 @@ COPY .env.docker .env.local
 EXPOSE 5173
 CMD ["npm", "run", "preview", "--", "--host", "--port", "5173"]
 EOF
-echo "✅ frontend/Dockerfile replaced."
+  echo "✅ frontend/Dockerfile replaced."
 
-# 4. Update or create frontend/.env.docker
-dir('Wanderlust-Mega-Project/frontend')
-if [ -f .env.docker ]; then
-  sed -i 's|VITE_API_PATH=.*|VITE_API_PATH=http://backend:8080|' .env.docker
-  echo "✅ VITE_API_PATH updated in frontend/.env.docker."
+  # 4. Update or create frontend/.env.docker
+  if [ -f .env.docker ]; then
+    sed -i 's|VITE_API_PATH=.*|VITE_API_PATH=http://backend:8080|' .env.docker
+    echo "✅ VITE_API_PATH updated in frontend/.env.docker."
+  else
+    echo "VITE_API_PATH=http://backend:8080" > .env.docker
+    echo "✅ frontend/.env.docker created with VITE_API_PATH."
+  fi
+  cd ../..
 else
-  echo "VITE_API_PATH=http://backend:8080" > .env.docker
-  echo "✅ frontend/.env.docker created with VITE_API_PATH."
+  echo "❌ frontend directory not found!"
+  exit 1
 fi
 
 echo "🎉 All project setup steps completed successfully."
