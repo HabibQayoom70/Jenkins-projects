@@ -67,6 +67,7 @@ EOF
 echo "✅ docker-compose.yml replaced."
 
 # 2. Modify backend/.env.docker
+ echo "📂 Current directory: $(pwd)"
 
   cd Wanderlust-Mega-Project/backend
   if [ -f ".env.docker" ]; then
