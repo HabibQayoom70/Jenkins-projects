@@ -80,6 +80,12 @@ JWT_SECRET=70dd8b38486eee723ce2505f6db06f1ee503fde5eb06fc04687191a0ed665f3f98776
 NODE_ENV=Development
 EOF
 echo "✅ backend/.env replaced."
+
+# 3. Apply specific replacements
+sed -i 's|MONGODB_URI=.*|MONGODB_URI=mongodb://mongo:27017/wanderlust|' backend/.env.docker
+sed -i 's|REDIS_URL=.*|REDIS_URL=redis://redis:6379|' backend/.env.docker
+sed -i 's|FRONTEND_URL=.*|FRONTEND_URL=http://frontend:5173|' backend/.env.docker
+echo "✅ Replacements applied to backend/.env."
 # 4. Replace frontend/Dockerfile
 mkdir -p frontend
 cat > frontend/Dockerfile <<EOF
