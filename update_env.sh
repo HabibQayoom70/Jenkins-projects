@@ -68,6 +68,7 @@ echo "✅ docker-compose.yml replaced."
 
 
 # 3. Apply specific replacements
+ls
 cd backend
 sed -i 's|MONGODB_URI=.*|MONGODB_URI=mongodb://mongo:27017/wanderlust|' .env.docker
 sed -i 's|REDIS_URL=.*|REDIS_URL=redis://redis:6379|' .env.docker
