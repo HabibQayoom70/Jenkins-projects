@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e  # Stop on any error
-ls
+echo "📂 Current directory: $(ls)"
 pwd
 echo "🔄 Setting up project..."
 
@@ -64,11 +64,12 @@ networks:
   app-network:
     driver: bridge
 EOF
-ls
+echo "📂 Current directory: $(ls)"
 pwd
 echo "✅ docker-compose.yml replaced."
 
 # 2. Modify backend/.env.docker
+echo "📂 Current directory: $(ls)"
 echo "📂 Current directory: $(pwd)"
 
 if [ -d "Wanderlust-Mega-Project/backend" ]; then
