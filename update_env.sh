@@ -77,7 +77,7 @@ if [ -d "Wanderlust-Mega-Project/backend" ]; then
   fi
   cd ..
 else
-  echo "❌ backend directory not found!"
+  echo "❌ backend  directory not found"
   exit 1
 fi
 
