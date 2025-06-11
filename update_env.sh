@@ -64,7 +64,8 @@ networks:
   app-network:
     driver: bridge
 EOF
-
+ls
+pwd
 echo "✅ docker-compose.yml replaced."
 
 # 2. Modify backend/.env.docker
