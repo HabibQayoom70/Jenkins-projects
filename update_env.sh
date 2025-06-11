@@ -65,8 +65,8 @@ networks:
 EOF
 echo "✅ docker-compose.yml replaced."
 
-if [ -d "backend" ]; then
-  cd backend
+if [ -d "Wanderlust-Mega-Project/backend" ]; then
+  cd Wanderlust-Mega-Project/backend
   if [ -f ".env.docker" ]; then
     sed -i 's|MONGODB_URI=.*|MONGODB_URI=mongodb://mongo:27017/wanderlust|' .env.docker
     sed -i 's|REDIS_URL=.*|REDIS_URL=redis://redis:6379|' .env.docker
