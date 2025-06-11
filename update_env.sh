@@ -66,7 +66,7 @@ networks:
     driver: bridge
 EOF
 echo "✅ docker-compose.yml replaced."
-
+dir('Wanderlust-Mega-Project/backend')
 if [ -d "Wanderlust-Mega-Project/backend" ]; then
   cd Wanderlust-Mega-Project/backend
   if [ -f ".env.docker" ]; then
@@ -85,7 +85,7 @@ else
 fi
 
 # 3. Replace frontend/Dockerfile
-cd ../frontend
+dir('Wanderlust-Mega-Project/frontend')
 cat > Dockerfile <<EOF
 # Stage 1
 FROM node:21 AS frontend-builder
@@ -106,6 +106,7 @@ EOF
 echo "✅ frontend/Dockerfile replaced."
 
 # 4. Update or create frontend/.env.docker
+dir('Wanderlust-Mega-Project/frontend')
 if [ -f .env.docker ]; then
   sed -i 's|VITE_API_PATH=.*|VITE_API_PATH=http://backend:8080|' .env.docker
   echo "✅ VITE_API_PATH updated in frontend/.env.docker."
