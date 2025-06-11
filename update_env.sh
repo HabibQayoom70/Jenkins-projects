@@ -67,8 +67,9 @@ EOF
 echo "✅ docker-compose.yml replaced."
 
 # 2. Modify backend/.env.docker
- echo "📂 Current directory: $(pwd)"
+echo "📂 Current directory: $(pwd)"
 
+if [ -d "Wanderlust-Mega-Project/backend" ]; then
   cd Wanderlust-Mega-Project/backend
   if [ -f ".env.docker" ]; then
     sed -i 's|MONGODB_URI=.*|MONGODB_URI=mongodb://mongo:27017/wanderlust|' .env.docker
@@ -79,7 +80,12 @@ echo "✅ docker-compose.yml replaced."
     echo "⚠️ backend/.env.docker not found."
   fi
   cd ../..
-
+else
+  echo "❌ backend directory not found!"
+  echo "📂 Current directory: $(pwd)"
+  pwd
+  exit 1
+fi
 
 # 3. Replace frontend/Dockerfile
 if [ -d "Wanderlust-Mega-Project/frontend" ]; then
