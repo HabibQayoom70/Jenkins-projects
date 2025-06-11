@@ -120,8 +120,3 @@ else
 fi
 
 echo "🎉 All project setup steps completed successfully."
-
-
-
-
-
