@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-echo "📂 Current directory: $(pwd)"
 echo "🔄 Setting up project..."
 
 # 1. Replace docker-compose.yml
