@@ -65,12 +65,21 @@ networks:
 EOF
 echo "✅ docker-compose.yml replaced."
 
-# 2. Apply replacements in backend/.env.docker
-cd backend
-sed -i 's|MONGODB_URI=.*|MONGODB_URI=mongodb://mongo:27017/wanderlust|' .env.docker
-sed -i 's|REDIS_URL=.*|REDIS_URL=redis://redis:6379|' .env.docker
-sed -i 's|FRONTEND_URL=.*|FRONTEND_URL=http://frontend:5173|' .env.docker
-echo "✅ Replacements applied to backend/.env.docker."
+if [ -d "backend" ]; then
+  cd backend
+  if [ -f ".env.docker" ]; then
+    sed -i 's|MONGODB_URI=.*|MONGODB_URI=mongodb://mongo:27017/wanderlust|' .env.docker
+    sed -i 's|REDIS_URL=.*|REDIS_URL=redis://redis:6379|' .env.docker
+    sed -i 's|FRONTEND_URL=.*|FRONTEND_URL=http://frontend:5173|' .env.docker
+    echo "✅ Replacements applied to backend/.env.docker."
+  else
+    echo "⚠️ backend/.env.docker not found."
+  fi
+  cd ..
+else
+  echo "❌ backend directory not found!"
+  exit 1
+fi
 
 # 3. Replace frontend/Dockerfile
 cd ../frontend
