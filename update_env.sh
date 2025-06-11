@@ -5,7 +5,6 @@ set -e  # Stop on any error
 echo "🔄 Setting up project..."
 
 # 1. Replace docker-compose.yml
-
 cat > docker-compose.yml <<EOF
 version: '3.9'
 
