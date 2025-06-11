@@ -80,8 +80,6 @@ JWT_SECRET=70dd8b38486eee723ce2505f6db06f1ee503fde5eb06fc04687191a0ed665f3f98776
 NODE_ENV=Development
 EOF
 echo "✅ backend/.env replaced."
-
-
 # 4. Replace frontend/Dockerfile
 mkdir -p frontend
 cat > frontend/Dockerfile <<EOF
